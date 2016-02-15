@@ -151,11 +151,18 @@ class ViewController: UIViewController {
             let restartAction = UIAlertAction(title: "Alright!", style: UIAlertActionStyle.Cancel, handler: {
                 
                 UIAlertAction in
-                
-                
+                    // Kode til restart af game
+                for Card in self.cards{
+                    Card.isDone = true
+                }
+                self.cards = self.gameModel.getCards()
+                self.revealedCard?.isDone = true
+                self.layoutCards()
+                self.countDown = 30;
+                self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "timerUpdate", userInfo: nil, repeats: true)
                 
             })
-            
+            alert.addAction(restartAction)
             self.presentViewController(alert, animated: true, completion: nil)
         }
     }
